@@ -44,6 +44,7 @@ public class UnoOnline
         String userName = sc.nextLine();
         boolean validPassword=false;
         String password="";
+        PasswordValidator validator=new PasswordValidator();
         while(!validPassword)
         {
             System.out.println("Passwords must have at least 8 characters");
@@ -51,20 +52,8 @@ public class UnoOnline
             System.out.println("Please enter your desired password:"); 
             
             password = sc.nextLine();
-            int specialCharCount=0;
-            //iterate over each character to see if it is a special character
-            for(int i=0;i<password.length(); i++)
-            {
-                if(!(Character.isLetterOrDigit(password.charAt(i))))
-                {
-                    //now we know there is at least one special character
-                    specialCharCount++;
-                }
-            }
-            if(specialCharCount>0 &&password.length()>7)
-            {
-                validPassword=true;
-            }
+            validPassword= validator.isValid(password);
+            
         }//loop only ends when password is valid so now we create the User
         
         User newUser = new User(userName, password);
